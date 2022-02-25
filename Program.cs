@@ -1,14 +1,50 @@
 ﻿using System;
 using Figgle;
+using System.Data.SQLite;
 
 namespace Diary_1._0
 {
     class Program
     {
+        static SQLiteConnection connection;
+        static SQLiteCommand command;
+
+        static public bool Connect(string fileName)
+        {
+            try
+            {
+                connection = new SQLiteConnection("Data Source=" + fileName + ";Version=3; FailIfMissing=False");
+                connection.Open();
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Console.WriteLine($"Ошибка доступа к базе данных. Исключение: {ex.Message}");
+                return false;
+            }
+        }
+
+        static string GenerateRequest()
+        {
+            string note = Console.ReadLine();
+
+            return "";
+        }
+
+        static void GenerateDB()
+        {
+            string create_db = "";
+        }
+
         static void Main(string[] args)
         {
+            if (Connect("main.db"))
+            {
+                Console.WriteLine("Connected");
+            }
+
             Console.WriteLine(
-            FiggleFonts.Slant.Render("Diary v 1.0"));
+                FiggleFonts.Slant.Render("Diary v 1.0"));
             Console.WriteLine("1. Create note [c]");
             Console.WriteLine("2. Edit note [e]");
             Console.WriteLine("3. Delete [d]");
@@ -25,8 +61,6 @@ namespace Diary_1._0
                 case 'E':
                     break;
             }
-            
-          
         }
     }
 }
