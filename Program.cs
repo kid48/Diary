@@ -2,6 +2,7 @@
 using Figgle;
 using System.Data.SQLite;
 
+
 namespace Diary_1._0
 {
     class Program
@@ -24,17 +25,9 @@ namespace Diary_1._0
             }
         }
 
-        static string GenerateRequest()
-        {
-            string note = Console.ReadLine();
+ 
 
-            return "";
-        }
-
-        static void GenerateDB()
-        {
-            string create_db = "";
-        }
+ 
 
         static void Main(string[] args)
         {
@@ -53,6 +46,9 @@ namespace Diary_1._0
             switch (answer)
             {
                 case 'c':
+                    DateTime thisDay = DateTime.Today;
+                    var note = Console.ReadLine();
+                    Console.WriteLine($"INSERT INTO notes (note, time) VALUES ('{note}', '{thisDay}');");
                     break;
                 case 'e':
                     break;
