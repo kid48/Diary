@@ -37,18 +37,20 @@ namespace Diary_1._0
 
             Console.WriteLine(
                 FiggleFonts.Slant.Render("Diary v 1.0"));
-            Console.WriteLine("1. Create note [c]");
-            Console.WriteLine("2. Edit note [e]");
+            Console.WriteLine("1. Create note [1]");
+            Console.WriteLine("2. Edit note [2]");
             Console.WriteLine("3. Delete [d]");
             Console.WriteLine("4. Exit [E]");
             string answer = Console.ReadLine();
            
-            if (string.Equals(answer, 'c'))
+            if (int.Parse(answer) == 1)
             {
                 string note = Console.ReadLine();
                 string request = GenerateRequest(note);
-                Console.WriteLine(request);
-            } else if(string.Equals(answer, 'e')) {
+                Console.WriteLine(value: request);
+            }
+            else if (int.Parse(answer) == 2)
+            {
                 fact(8);
             }else
             {
@@ -66,16 +68,17 @@ namespace Diary_1._0
             {
                 int result = 1;
                 int i = 1;
-                while (i >= cislo)
+                while (i <= cislo)
                 {
                     result = result * i;
                     i++;
+                    
                 }
+                return cislo;
             }else
             {
-                return 0;
+                return 1;
             }
-            return 0;
         }
     }
 }
