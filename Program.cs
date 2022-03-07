@@ -2,7 +2,6 @@
 using Figgle;
 using System.Data.SQLite;
 
-
 namespace Diary_1._0
 {
     class Program
@@ -42,21 +41,41 @@ namespace Diary_1._0
             Console.WriteLine("2. Edit note [e]");
             Console.WriteLine("3. Delete [d]");
             Console.WriteLine("4. Exit [E]");
-            var answer = Console.ReadKey().KeyChar;
-            switch (answer)
+            string answer = Console.ReadLine();
+           
+            if (string.Equals(answer, 'c'))
             {
-                case 'c':
-                    DateTime thisDay = DateTime.Today;
-                    var note = Console.ReadLine();
-                    Console.WriteLine($"INSERT INTO notes (note, time) VALUES ('{note}', '{thisDay}');");
-                    break;
-                case 'e':
-                    break;
-                case 'd':
-                    break;
-                case 'E':
-                    break;
+                string note = Console.ReadLine();
+                string request = GenerateRequest(note);
+                Console.WriteLine(request);
+            } else if(string.Equals(answer, 'e')) {
+                fact(8);
+            }else
+            {
+                
             }
+        }
+        static string GenerateRequest(string note)
+        {
+            DateTime thisDay = DateTime.Today;
+            return $"INSERT INTO notes (note, time) VALUES ('{note}', '{thisDay}');";
+        }
+        static int fact(int cislo)
+        {
+            if (cislo > 1)
+            {
+                int result = 1;
+                int i = 1;
+                while (i >= cislo)
+                {
+                    result = result * i;
+                    i++;
+                }
+            }else
+            {
+                return 0;
+            }
+            return 0;
         }
     }
 }
