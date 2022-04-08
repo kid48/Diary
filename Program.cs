@@ -36,7 +36,19 @@ namespace Diary_1._0
             }
             else if (int.Parse(answer) == 2)
             {
-
+                string query = "SELECT * FROM sqlite_master";
+                SQLiteCommand command = new SQLiteCommand(query, databaseObject.myConnection);
+                databaseObject.OpenConnection();
+                SQLiteDataReader result = command.ExecuteReader();
+                if (result.HasRows)
+                {
+                    while (result.Read())
+                    {
+                        Console.WriteLine("Name: {0} ", result["name"]);
+                        //Console.WriteLine("Note: {0} ", result["note"]);
+                    }
+                }
+                databaseObject.CloseConnection();
             }else
             {
                 
