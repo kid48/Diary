@@ -11,10 +11,10 @@ namespace Diary_1._0
 
         public Database()
         {
-            myConnection = new SQLiteConnection("Data Source=main.db");
-            if (!File.Exists("./Notes.sqlite3")){}
+            myConnection = new SQLiteConnection("Data Source=main.db;Version=3;");
+            if (!File.Exists("./main.db")){}
             {
-                SQLiteConnection.CreateFile("Notes.sqlite3");
+                SQLiteConnection.CreateFile("main.db");
             }
         }
 
