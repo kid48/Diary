@@ -11,11 +11,12 @@ namespace Diary_1._0
 
         public Database()
         {
-            myConnection = new SQLiteConnection(@"Data Source=C:\Users\21201\OneDrive\Рабочий стол\Diary\main.db;Version=3;");
-            // if (!File.Exists("./main.db")){}
-            // {
-            //     SQLiteConnection.CreateFile("main.db");
-            // }
+            myConnection = new SQLiteConnection(@"Data Source=main.db;Version=3;");
+            if (!File.Exists("./main.db")){}
+            {
+                
+
+            }
         }
 
         public void OpenConnection()
