@@ -8,9 +8,12 @@ namespace Diary_1._0
 {
     class Program
     {
-
+    //Starting the program and waiting for user input
+    //Zahájení programu a čekání na vstup uživatele
         static void Main(string[] args)
         {
+            //Creating a table if it did not exist.
+            //Vytvoření tabulky, pokud neexistovala.
           Create_table();
             Console.WriteLine(
                 FiggleFonts.Slant.Render("Diary v 1.0"));
@@ -23,25 +26,35 @@ namespace Diary_1._0
                 string input_answer = "0";
                 input_answer = Console.ReadLine();
                
-
+                
                 switch (input_answer)
                 {
                     case "1":
-                        Create_Note();
+                        //Using the function to create a note
+                        //Použití funkce pro vytvoření poznámky
+                        CreateNote();
                         Console.WriteLine("Enter the function number / Zadejte číslo funkce");
                         continue;
                     case "2":
-                        Display_all_notes();
+                        //Using the function to display all notes
+                        //Použití funkce pro zobrazení všech poznámek
+                        DisplayAllNotes();
                         Console.WriteLine("Enter the function number / Zadejte číslo funkce");
                         continue;
                     case "3":
-                        Deleta_all_notes();
+                        //Using the function to delete all notes
+                        //Použití funkce pro odstranění všech poznámek
+                        DeleteAllNotes();
                         Console.WriteLine("Enter the function number / Zadejte číslo funkce");
                         continue;
                     case "4":
+                        //Choose this to end the program
+                        // Zvolte toto pro ukončení programu
                         Console.WriteLine("End of the program / Konec programu");
                         return;
                     default: 
+                        //Filtering out incorrect numbers and signs
+                        //Odstranění nesprávných čísel a značek
                         Console.WriteLine("Enter the function number / Zadejte číslo funkce");
                         continue;
                         
@@ -51,23 +64,51 @@ namespace Diary_1._0
 
            
         }
-
-        static void Create_Note()
+        //This function creates notes and writes them to the Database
+        //Tato funkce vytváří poznámky a zaznamenává a do databáze
+        //
+        //
+        //
+        static void CreateNote()
         {
             Console.WriteLine("Write a note / Napište poznámku");
+            //Defining the database
+            //Definujeme dB
             Database databaseObject = new Database();
+            
             string note = Console.ReadLine();
+            
+            //Getting the current time
+            //Získáme aktuální čas
             DateTime thisDay = DateTime.Now;
+            
+            //Forming a query to the database
+            //Vytvoření dotazu do databáze
             string query = "INSERT INTO notes (note, time) VALUES";
+            
+            //Adding parameters to the query
+            //Přidání parametrů do dotazu
             query += string.Format("('{0}','{1}')", note, thisDay);
             SQLiteCommand command = new SQLiteCommand(query, databaseObject.myConnection);
+            
+            //Opening the connection to DB
+            //Otevírám připojení k DB
             databaseObject.OpenConnection();
+            
+            //Executing a query to the database
+            //Spuštění dotazu do databáze
             command.ExecuteNonQuery();
+            
+            //Closing the connection to the database
+            //Uzavřeme spojení s DB
             databaseObject.CloseConnection();
             Console.WriteLine("Note created / Poznámka vytvořena");
         }
-
-        static void Display_all_notes()
+        //It works the same way here
+        //This function outputs all notes
+        //Zde funguje podobně
+        //Tato funkce zobrazuje všechny poznámky
+        static void DisplayAllNotes()
         {
             Database databaseObject = new Database();
             string query = "SELECT * FROM notes";
@@ -87,8 +128,9 @@ namespace Diary_1._0
             databaseObject.CloseConnection();
             Console.WriteLine("notes displayed / zobrazené poznámky.");
         }
-
-        static void Deleta_all_notes()
+        //This function deletes all notes
+        //Tato funkce odstraní všechny poznámky
+        static void DeleteAllNotes()
         {
             Database databaseObject = new Database();
             string query = "DELETE FROM notes";
@@ -98,7 +140,8 @@ namespace Diary_1._0
             databaseObject.CloseConnection();
             Console.WriteLine("Notes deleted / Poznámky odstraněny");
         }
-
+        //This function creates a table if it wasn't there before.
+        //Tato funkce vytvoří tabulku, pokud nebyla předtím.
         static void Create_table()
         {
             Database databaseObject = new Database();
